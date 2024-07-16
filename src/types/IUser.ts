@@ -3,5 +3,6 @@ export interface IUser {
   password: string;
   email: string;
   createdAt?: Date | string;
+  role?: string;
   updatedAt?: Date | string;
 }

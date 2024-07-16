@@ -22,8 +22,8 @@ export const login = async (user: IUser) => {
 
     // Gerar um token JWT se o login for bem-sucedido
     const token = jwt.sign(
-      { id: foundUser._id, email: foundUser.email },
-      process.env.JWT_SECRET || "defaultSecretKey", // Use uma variável de ambiente para a chave secreta
+      { id: foundUser._id, email: foundUser.email, role: foundUser.role },
+      process.env.JWT_SECRET || "defaultSecretKey",
       { expiresIn: "1h" }
     );
 

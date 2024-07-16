@@ -9,6 +9,11 @@ const UserSchema: Schema<IUser> = new Schema({
     minlength: 3,
     maxlength: 30,
   },
+  role: {
+    type: String,
+    enum: ["user", "admin", "manager"],
+    default: "user",
+  },
   password: { type: String, required: true, minlength: 8, maxlength: 128 },
   email: { type: String, required: true, unique: true },
   createdAt: { type: Date, default: Date.now },
