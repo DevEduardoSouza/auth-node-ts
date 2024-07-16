@@ -16,6 +16,7 @@ const UserSchema: Schema<IUser> = new Schema({
   },
   password: { type: String, required: true, minlength: 8, maxlength: 128 },
   email: { type: String, required: true, unique: true },
+  verificationCode: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

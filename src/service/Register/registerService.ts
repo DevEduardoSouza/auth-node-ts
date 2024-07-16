@@ -1,7 +1,9 @@
 import User from "../../models/User";
 import { IUser } from "../../types/IUser";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import { sendVerificationEmail } from "../../utils/emailUtils";
+import { randomCode } from "../../utils/randomCode";
 
 export const register = async (user: IUser) => {
   try {
@@ -17,14 +19,19 @@ export const register = async (user: IUser) => {
       return { message: "username already exists" };
     }
     const hashedPassword = await bcrypt.hash(password, 10);
+    const verificationCode = randomCode();
+
     const newUser = new User({
       username,
       password: hashedPassword,
       email,
+      verificationCode,
     });
     await newUser.save();
 
-    return { message: "User registered successfully" };
+    await sendVerificationEmail(email, verificationCode);
+
+    return { message: "User registered successfully. Please check your email for verification." };
   } catch (error: any) {
     console.error("Error in registration service:", error);
     return {
