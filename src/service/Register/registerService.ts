@@ -1,7 +1,6 @@
 import User from "../../models/User";
 import { IUser } from "../../types/IUser";
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
 import { sendVerificationEmail } from "../../utils/emailUtils";
 import { randomCode } from "../../utils/randomCode";
 
@@ -26,6 +25,7 @@ export const register = async (user: IUser) => {
       password: hashedPassword,
       email,
       verificationCode,
+      verified: false,
     });
     await newUser.save();
 

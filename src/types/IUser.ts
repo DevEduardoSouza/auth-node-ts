@@ -5,5 +5,6 @@ export interface IUser {
   createdAt?: Date | string;
   verificationCode?: string;
   role?: string;
+  verified?: boolean;
   updatedAt?: Date | string;
 }

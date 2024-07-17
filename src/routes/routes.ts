@@ -3,6 +3,7 @@ import { loginController } from "../controllers/Login/loginController";
 import { registerController } from "../controllers/Register/registerController";
 import { authMiddleware, authorize } from "../auth/authMiddleware";
 import { handleValidationErrors, validateUser } from "../validations/userValidation";
+import { verifyCodeController } from "../controllers/VerifyCode/verifyCodeController";
 
 const routes = Router();
 
@@ -12,7 +13,7 @@ routes.post("/api/register", validateUser, handleValidationErrors, (req: Request
   registerController(req, res)
 );
 
-routes.post("/app/send-code", () => {});
+routes.post("/api/verify", (req: Request, res: Response) => verifyCodeController(req, res));
 
 // route private
 routes.post(
